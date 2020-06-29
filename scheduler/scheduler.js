@@ -1,5 +1,9 @@
 const trips = require('../trips/trips');
 
-const buses = {};
+function scheduleTrips() {
+  const buses = {};
 
-module.exports = buses;
+  return buses;
+}
+
+module.exports = scheduleTrips;

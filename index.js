@@ -1,13 +1,15 @@
 const express = require('express');
 const path = require('path');
 const trips = require('./trips/trips');
-const buses = require('./scheduler/scheduler');
+const scheduleTrips = require('./scheduler/scheduler');
+const bodyParser = require('body-parser');
 const app = express();
 
 app.use(express.static(path.join(__dirname, 'client', 'build')));
 app.use(bodyParser.json());
 
 app.get('/api/buses', (_, res) => {
+  const buses = scheduleTrips();
   res.json(buses);
 })
 
