@@ -7,6 +7,9 @@
     "type": "git",
     "url": "git+https://github.com/madmonl/trip-scheduler.git"
   },
+  "scripts": {
+    "eslint": "./node_modules/.bin/eslint . --resolve-plugins-relative-to ."
+  },
   "author": "",
   "license": "ISC",
   "bugs": {
