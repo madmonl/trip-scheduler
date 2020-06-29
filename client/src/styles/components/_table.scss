@@ -1,0 +1,13 @@
+.table {
+  min-width: 700px;
+  max-width: 80%;
+  margin: auto;
+}
+
+.table__cell {
+  font-size: $font-size-small;
+}
+
+.table__header {
+  font-size: $font-size-small !important;
+}

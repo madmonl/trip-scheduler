@@ -1,5 +1,3 @@
-const trips = require('../trips/trips');
-
 function shouldAddCurrTrip(lastTrip, currTrip) {
   const fiveMinutesInMS = 300000;
   const isOriginAlsoDestination = (currTrip.originCode === lastTrip.destinationCode);
@@ -32,8 +30,7 @@ function scheduleBusRides(trips) {
   return { busType, trips: tripsTaken };
 }
 
-function scheduleTrips(trips) {
-  trips = trips.map((trip, index) => ({ ...trip, id: index }));
+function schedule(trips) {
   const buses = {};
 
   trips = trips.sort((tripA, tripB) => (
@@ -49,4 +46,4 @@ function scheduleTrips(trips) {
   return buses;
 }
 
-module.exports = scheduleTrips(trips);
+exports.schedule = schedule;

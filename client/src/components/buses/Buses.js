@@ -8,6 +8,10 @@ export default function Buses() {
     (async () => {
       const { data } = await axios.get('/api/buses');
       setBuses(data);
+      const loader = document.getElementById('loader');
+      if (loader) {
+        loader.remove();
+      }
     })();
   });
 

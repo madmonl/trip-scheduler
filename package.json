@@ -8,6 +8,7 @@
     "url": "git+https://github.com/madmonl/trip-scheduler.git"
   },
   "scripts": {
+    "start": "node index.js",
     "eslint": "./node_modules/.bin/eslint . --resolve-plugins-relative-to ."
   },
   "author": "",
@@ -18,7 +19,8 @@
   "homepage": "https://github.com/madmonl/trip-scheduler#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "lodash": "^4.17.15"
   },
   "devDependencies": {
     "eslint": "^7.3.1",

@@ -1,26 +1,25 @@
 const express = require('express');
-const path = require('path');
-const trips = require('./trips/trips');
-const bodyParser = require('body-parser');
-const buses = require('./scheduler/buses');
+const _ = require('lodash');
+const { schedule } = require('./scheduler/scheduler');
+let trips = require('./trips/trips');
+
+trips = trips.map((trip, index) => ({ ...trip, id: index + 1 }));
+const buses = schedule(_.cloneDeep(trips));
 
 const app = express();
+// app.use(express.static(path.join(__dirname, 'client', 'build')));
 
-app.use(express.static(path.join(__dirname, 'client', 'build')));
-app.use(bodyParser.json());
-
-console.log(buses);
-app.get('/api/buses', (_, res) => {
+app.get('/api/buses', (req, res) => {
   res.json(buses);
 })
 
-app.post('/api/trips', (_, res) => {
+app.get('/api/trips', (req, res) => {
   res.json(trips);
 });
 
-app.get('*', (_, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+// });
 
 const port = process.env.PORT || 5000;
 app.listen(port);
