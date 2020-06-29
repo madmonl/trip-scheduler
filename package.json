@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/madmonl/trip-scheduler/issues"
   },
-  "homepage": "https://github.com/madmonl/trip-scheduler#readme"
+  "homepage": "https://github.com/madmonl/trip-scheduler#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
