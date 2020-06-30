@@ -31,7 +31,7 @@ export function selectBuses(state) {
   }
 
   return buses.filter((bus) => {
-    return bus.id.toString().startsWith(searchFilter);
+    return bus.busId.toString().startsWith(searchFilter);
   })
 }
 

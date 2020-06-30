@@ -11,7 +11,7 @@ function shouldAddCurrTrip(lastTrip, currTrip) {
 
 function scheduleBusRides(trips) {
   let lastScheduledTrip = trips[0];
-  const tripsTaken = { [lastScheduledTrip.id]: lastScheduledTrip };
+  const tripsTaken = { [lastScheduledTrip.tripId]: lastScheduledTrip };
   const busType = lastScheduledTrip.busType;
   trips.splice(0, 1);
 
@@ -21,7 +21,7 @@ function scheduleBusRides(trips) {
       const shouldAddTrip = shouldAddCurrTrip(lastScheduledTrip, currTrip);
       if (shouldAddTrip) {
         lastScheduledTrip = currTrip;
-        tripsTaken[lastScheduledTrip.id] = lastScheduledTrip;
+        tripsTaken[lastScheduledTrip.tripId] = lastScheduledTrip;
         trips.splice(i, 1);
       }
     }
@@ -40,7 +40,7 @@ function schedule(trips) {
   let busId = 1;
   while (trips.length > 0) {
     const tripsBusShouldTake = scheduleBusRides(trips);
-    buses.push({ ...tripsBusShouldTake, id: busId });
+    buses.push({ ...tripsBusShouldTake, busId });
     busId++;
   }
 
@@ -49,9 +49,9 @@ function schedule(trips) {
 
 function assignTripsDrivers(trips, buses) {
   trips.forEach((trip) => {
-    buses.forEach(({ id, trips }) => {
-      if (trips[trip.id]) {
-        trip.driverId = id;
+    buses.forEach(({ busId, trips }) => {
+      if (trips[trip.tripId]) {
+        trip.busId = busId;
       }
     })
   })

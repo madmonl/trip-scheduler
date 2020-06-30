@@ -5,7 +5,13 @@ import Toolbar from '@material-ui/core/Toolbar';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectSearchFilter, setSearchFilter } from './headerSlice';
+import {
+  selectSearchFilter,
+  setSearchFilter,
+  resetCurrTablePage,
+  resetSearchFilter
+} from './headerSlice';
+
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -18,8 +24,22 @@ export default function Header() {
   return (
     <AppBar className="header" position="static">
       <Toolbar className="header__container">
-        <Link className="header__link" to="/">Trips</Link>
-        <Link className="header__link" to="/buses">Buses</Link>
+        <Link
+          className="header__link"
+          to="/"
+          onClick={() => {
+            dispatch(resetCurrTablePage())
+            dispatch(resetSearchFilter())
+          }}
+        >Trips</Link>
+        <Link
+          className="header__link"
+          to="/buses"
+          onClick={() => {
+            dispatch(resetCurrTablePage())
+            dispatch(resetSearchFilter())
+          }}
+        >Buses</Link>
         <div className="header__search">
           <div className="search-icon">
             <SearchIcon />

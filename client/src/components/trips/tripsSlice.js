@@ -16,19 +16,19 @@ export const tripsSlice = createSlice({
 
 export const { setTrips } = tripsSlice.actions;
 
-export function selectTrips(state, searchFilter, driverId = '') {
+export function selectTrips(state, searchFilter, busId = '') {
   const trips = state.trips.value.trips;
   return trips.filter((trip) => {
-    if (!searchFilter && !driverId) {
+    if (!searchFilter && !busId) {
       return true;
-    } else if (driverId && !searchFilter) {
-      return (trip.driverId.toString() === driverId);
-    } else if (!driverId && searchFilter) {
-      return trip.id.toString().startsWith(searchFilter);
+    } else if (busId && !searchFilter) {
+      return (trip.busId.toString() === busId);
+    } else if (!busId && searchFilter) {
+      return trip.tripId.toString().startsWith(searchFilter);
     } else {
       return (
-        trip.id.toString().startsWith(searchFilter) &&
-        trip.driverId.toString() === driverId
+        trip.tripId.toString().startsWith(searchFilter) &&
+        trip.busId.toString() === busId
       );
     }
   });
