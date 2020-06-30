@@ -4,8 +4,17 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectSearchFilter, setSearchFilter } from './headerSlice';
 
 export default function Header() {
+  const dispatch = useDispatch();
+  const searchFilter = useSelector(selectSearchFilter);
+
+  const handleSearchChange = (event) => {
+    dispatch(setSearchFilter(event.target.value));
+  }
+
   return (
     <AppBar className="header" position="static">
       <Toolbar className="header__container">
@@ -17,6 +26,8 @@ export default function Header() {
           </div>
           <InputBase
             className="header__search-text"
+            value={searchFilter}
+            onChange={handleSearchChange}
             placeholder="Search by id"
             inputProps={{ 'aria-label': 'search' }}
           />

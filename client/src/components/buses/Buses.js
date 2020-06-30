@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
+import { useDispatch, useSelector } from 'react-redux';
+import { setBuses, selectBuses } from './busesSlice';
 import axios from 'axios';
 import { trackPromise } from 'react-promise-tracker';
 import DataTable from '../dataTable/DataTable';
 
 export default function Buses() {
-  const [buses, setBuses] = useState({});
+  const dispatch = useDispatch();
+  const buses = useSelector(selectBuses);
   const busesHeader = ['id', 'busType', 'trips'];
-  const busesRows = Object.values(buses).map(({ id, busType }) => {
+  const busesRows = buses.map(({ id, busType }) => {
     return ({
       id,
       busType,
@@ -23,7 +26,7 @@ export default function Buses() {
   useEffect(() => {
     (async () => {
       const { data } = await trackPromise(axios.get('/api/buses'));
-      setBuses(data);
+      dispatch(setBuses(data));
     })();
   }, []);
 
