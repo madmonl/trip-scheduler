@@ -28,7 +28,7 @@ export default function Buses() {
           className="link"
           to={`/buses/${busId}`}
         ><Button
-          color="secondary"
+          color="primary"
           className="button--link button--small"
           variant="contained"
         >View Trips</Button>

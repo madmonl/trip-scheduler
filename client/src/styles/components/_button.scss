@@ -11,3 +11,9 @@
   text-decoration: none !important;
   width: max-content;
 }
+
+.button--export {
+  margin-left: $m-size !important;
+  background-color: lighten(rgb(2, 51, 2), 20%) !important;
+  color: $off-white !important;
+}
