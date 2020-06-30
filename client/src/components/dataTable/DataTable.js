@@ -5,8 +5,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import TablePagination from '@material-ui/core/TablePagination';
 import Paper from '@material-ui/core/Paper';
+import TablePagination from '@material-ui/core/TablePagination';
 import { withStyles } from '@material-ui/core/styles';
 
 const StyledTableCell = withStyles((theme) => ({
@@ -31,12 +31,12 @@ export default function DataTable({ header, rows }) {
   const rowsPerPage = 10;
   const [currPage, setCurrPage] = useState(0);
 
-  const handleChangePage = (event, newPageNumber) => {
+  const handleChangePage = (_, newPageNumber) => {
     setCurrPage(newPageNumber);
   }
 
   return (
-    <Paper>
+    <div>
       <TableContainer className="table-container" component={Paper}>
         <Table className="table" aria-label="customized table">
           <TableHead>
@@ -63,16 +63,16 @@ export default function DataTable({ header, rows }) {
             ))}
           </TableBody>
         </Table>
+        <TablePagination
+          className="table__pagination"
+          component="div"
+          count={rows.length}
+          rowsPerPage={rowsPerPage}
+          page={currPage}
+          onChangePage={handleChangePage}
+          rowsPerPageOptions={[rowsPerPage]}
+        />
       </TableContainer>
-      <TablePagination
-        className="table__pagination"
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={currPage}
-        onChangePage={handleChangePage}
-        rowsPerPageOptions={[rowsPerPage]}
-      />
-    </Paper >
+    </div>
   );
 }

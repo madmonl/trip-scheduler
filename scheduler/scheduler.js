@@ -37,9 +37,10 @@ function schedule(trips) {
     tripA.startTime < tripB.startTime ? -1 : 1
   ));
 
-  let busId = 0;
+  let busId = 1;
   while (trips.length > 0) {
-    buses[busId] = scheduleBusRides(trips);
+    const tripsBusShouldTake = scheduleBusRides(trips);
+    buses[busId] = { ...tripsBusShouldTake, id: busId };
     busId++;
   }
 

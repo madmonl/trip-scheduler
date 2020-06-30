@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { trackPromise } from 'react-promise-tracker';
 import DataTable from '../dataTable/DataTable';
 
 export default function Trips() {
@@ -8,13 +9,9 @@ export default function Trips() {
 
   useEffect(() => {
     (async () => {
-      const { data } = await axios.get('/api/trips');
+      const { data } = await trackPromise(axios.get('/api/trips'));
       setTrips(data);
       setTripsHeader(Object.keys(data[0]));
-      // const loader = document.getElementById('loader');
-      // if (loader) {
-      //   loader.remove();
-      // }
     })();
   }, []);
 

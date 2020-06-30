@@ -6,12 +6,14 @@ import './styles/styles.scss';
 import Loader from './components/loader/Loader';
 
 const App = (
-  <React.StrictMode>
-    <AppRouter />
-  </React.StrictMode>
+  <div>
+    <React.StrictMode>
+      <AppRouter />
+    </React.StrictMode>
+    <Loader />
+  </div>
 );
 
-ReactDOM.render(<Loader />, document.getElementById('loader'));
 ReactDOM.render(App, document.getElementById('root'));
 
 serviceWorker.unregister();

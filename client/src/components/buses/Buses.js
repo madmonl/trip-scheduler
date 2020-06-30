@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
+import { trackPromise } from 'react-promise-tracker';
 import DataTable from '../dataTable/DataTable';
 
 export default function Buses() {
@@ -21,12 +22,8 @@ export default function Buses() {
 
   useEffect(() => {
     (async () => {
-      const { data } = await axios.get('/api/buses');
+      const { data } = await trackPromise(axios.get('/api/buses'));
       setBuses(data);
-      // const loader = document.getElementById('loader');
-      // if (loader) {
-      //   loader.remove();
-      // }
     })();
   }, []);
 
