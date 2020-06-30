@@ -8,7 +8,7 @@ export default function Header() {
     <AppBar className="header" position="static">
       <Toolbar className="header__container">
         <Link className="header__link" to="/">Trips</Link>
-        <Link className="header__link" to="/Buses">Buses</Link>
+        <Link className="header__link" to="/buses">Buses</Link>
       </Toolbar>
     </AppBar>
   );

@@ -28,7 +28,7 @@ const StyledTableRow = withStyles((theme) => ({
 }))(TableRow);
 
 export default function DataTable({ header, rows }) {
-  const rowsPerPage = 12;
+  const rowsPerPage = 10;
   const [currPage, setCurrPage] = useState(0);
 
   const handleChangePage = (event, newPageNumber) => {
@@ -37,7 +37,7 @@ export default function DataTable({ header, rows }) {
 
   return (
     <Paper>
-      <TableContainer component={Paper}>
+      <TableContainer className="table-container" component={Paper}>
         <Table className="table" aria-label="customized table">
           <TableHead>
             <TableRow>
@@ -65,11 +65,13 @@ export default function DataTable({ header, rows }) {
         </Table>
       </TableContainer>
       <TablePagination
+        className="table__pagination"
         component="div"
         count={rows.length}
         rowsPerPage={rowsPerPage}
         page={currPage}
         onChangePage={handleChangePage}
+        rowsPerPageOptions={[rowsPerPage]}
       />
     </Paper >
   );

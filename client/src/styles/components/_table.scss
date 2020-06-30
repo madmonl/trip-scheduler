@@ -1,7 +1,11 @@
-.table {
+.table, .table__pagination {
   min-width: 700px;
   max-width: 80%;
   margin: auto;
+}
+
+.table-container {
+  max-height: 80vh !important;
 }
 
 .table__cell {
