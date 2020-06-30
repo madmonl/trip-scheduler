@@ -2,15 +2,20 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { trackPromise } from 'react-promise-tracker';
 import DataTable from '../dataTable/DataTable';
+import { selectTrips, setTrips } from './tripsSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectSearchFilter } from './../header/headerSlice';
 
 export default function Trips() {
-  const [trips, setTrips] = useState([]);
+  const dispatch = useDispatch();
+  const searchFilter = useSelector(selectSearchFilter);
+  const trips = useSelector((event) => selectTrips(event, searchFilter));
   const [tripsHeader, setTripsHeader] = useState([]);
 
   useEffect(() => {
     (async () => {
       const { data } = await trackPromise(axios.get('/api/trips'));
-      setTrips(data);
+      dispatch(setTrips(data));
       setTripsHeader(Object.keys(data[0]));
     })();
   }, []);

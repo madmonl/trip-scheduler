@@ -6,10 +6,12 @@ import { setBuses, selectBuses } from './busesSlice';
 import axios from 'axios';
 import { trackPromise } from 'react-promise-tracker';
 import DataTable from '../dataTable/DataTable';
+import { selectSearchFilter } from './../header/headerSlice';
 
 export default function Buses() {
   const dispatch = useDispatch();
-  const buses = useSelector(selectBuses);
+  const searchFilter = useSelector(selectSearchFilter);
+  const buses = useSelector((event) => selectBuses(event, searchFilter));
   const busesHeader = ['id', 'busType', 'trips'];
   const busesRows = buses.map(({ id, busType }) => {
     return ({
