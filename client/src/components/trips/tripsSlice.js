@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
+import store from '../../store/store';
 
 export const tripsSlice = createSlice({
   name: 'trips',
@@ -14,7 +16,7 @@ export const tripsSlice = createSlice({
 
 export const { setTrips } = tripsSlice.actions;
 
-export const selectTrips = (state, searchFilter, driverId = '') => {
+export function selectTrips(state, searchFilter, driverId = '') {
   const trips = state.trips.value.trips;
   return trips.filter((trip) => {
     if (!searchFilter && !driverId) {
@@ -32,7 +34,12 @@ export const selectTrips = (state, searchFilter, driverId = '') => {
   });
 }
 
-export const selectTripsHeader = (state) => {
+export async function fetchTrips() {
+  const { data } = await axios.get('/api/trips');
+  store.dispatch(setTrips(data));
+}
+
+export function selectTripsHeader(state) {
   const areTripsFetched = state.trips.value.trips.length;
   return (areTripsFetched ? Object.keys(state.trips.value.trips[0]) : []);
 }

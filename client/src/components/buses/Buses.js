@@ -1,15 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-import { useDispatch, useSelector } from 'react-redux';
-import { setBuses, selectBuses } from './busesSlice';
-import axios from 'axios';
-import { trackPromise } from 'react-promise-tracker';
+import { useSelector } from 'react-redux';
+import { selectBuses } from './busesSlice';
 import DataTable from '../dataTable/DataTable';
 import { selectSearchFilter } from './../header/headerSlice';
 
 export default function Buses() {
-  const dispatch = useDispatch();
   const searchFilter = useSelector(selectSearchFilter);
   const buses = useSelector((event) => selectBuses(event, searchFilter));
   const busesHeader = ['id', 'busType', 'trips'];
@@ -24,13 +21,6 @@ export default function Buses() {
       >View Trips</Button></Link>
     });
   });
-
-  useEffect(() => {
-    (async () => {
-      const { data } = await trackPromise(axios.get('/api/buses'));
-      dispatch(setBuses(data));
-    })();
-  }, []);
 
   return <DataTable header={busesHeader} rows={busesRows} />;
 }

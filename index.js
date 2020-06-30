@@ -1,21 +1,18 @@
 const express = require('express');
 const _ = require('lodash');
 const path = require('path');
-const { schedule } = require('./scheduler/scheduler');
+const { schedule, assignTripsDrivers } = require('./scheduler/scheduler');
 let trips = require('./trips/trips');
 
 trips = trips.map((trip, index) => ({ id: index + 1, ...trip }));
 const buses = schedule(_.cloneDeep(trips));
+assignTripsDrivers(trips, buses);
 
 const app = express();
 app.use(express.static(path.join(__dirname, 'client', 'build')));
 
 app.get('/api/buses', (req, res) => {
   res.json(buses);
-});
-
-app.get('/api/buses/:id', (req, res) => {
-  res.json(buses[req.params.id].trips);
 });
 
 app.get('/api/trips', (req, res) => {

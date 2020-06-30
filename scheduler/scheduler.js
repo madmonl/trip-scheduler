@@ -31,7 +31,7 @@ function scheduleBusRides(trips) {
 }
 
 function schedule(trips) {
-  const buses = {};
+  const buses = [];
 
   trips = trips.sort((tripA, tripB) => (
     tripA.startTime < tripB.startTime ? -1 : 1
@@ -40,11 +40,22 @@ function schedule(trips) {
   let busId = 1;
   while (trips.length > 0) {
     const tripsBusShouldTake = scheduleBusRides(trips);
-    buses[busId] = { ...tripsBusShouldTake, id: busId };
+    buses.push({ ...tripsBusShouldTake, id: busId });
     busId++;
   }
 
   return buses;
 }
 
+function assignTripsDrivers(trips, buses) {
+  trips.forEach((trip) => {
+    buses.forEach(({ id, trips }) => {
+      if (trips[trip.id]) {
+        trip.driverId = id;
+      }
+    })
+  })
+}
+
 exports.schedule = schedule;
+exports.assignTripsDrivers = assignTripsDrivers;
